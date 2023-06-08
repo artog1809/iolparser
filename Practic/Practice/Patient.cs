@@ -7,4 +7,4 @@
 /// <param name="BirthDate">Дата рождения</param>
 /// <param name="Sex">Пол</param>
 /// <param name="PatientId">Id</param>
-public record Patient(string Name, string BirthDate, string Sex, string PatientId);
+public record Patient(string Name, DateTime BirthDate, string Sex, string PatientId);
