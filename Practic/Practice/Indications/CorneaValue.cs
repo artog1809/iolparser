@@ -1,3 +1,3 @@
 ﻿namespace Practice.Indications;
 
-public record struct CorneaValue(float dptr, int? degrees);
+public record struct CorneaValue(float Dptr, int? Degrees);
