@@ -10,14 +10,15 @@ namespace Practice
         {
             // Выгрузка текста с пдф
             string[] input = pdfReading();
+
             string[] word = input[2].Split(new char[] { ' ' });
 
             Patient newPatient = new Patient(input[1], word[2], word[4], input[5]);
 
             File.WriteAllText("patient.json", JsonConvert.SerializeObject(newPatient));
 
+            PdfParser.FifthPageParser();
 
-            string[] arr = PdfParser.FifthPageParser();
         }
 
 
