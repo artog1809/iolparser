@@ -12,24 +12,21 @@ namespace Practice
             string[] input = pdfReading();
             string[] word = input[2].Split(new char[] { ' ' });
 
-            Patient newPatient = new Patient(input[1], DateTime.Parse(word[2]), word[4], input[5]);
+            Patient newPatient = new Patient(input[1], word[2], word[4], input[5]);
 
             File.WriteAllText("patient.json", JsonConvert.SerializeObject(newPatient));
 
 
-            Console.WriteLine(newPatient.Name + "\n" + newPatient.BirthDate + "\n" + newPatient.Sex + "\n" +
-                              newPatient.PatientId);
+            string[] arr = PdfParser.FifthPageParser();
         }
 
 
         public static string[] pdfReading()
-        {
+        {   
             PdfReader reader = new PdfReader("dip.pdf");
             string text = string.Empty;
-            for (int page = 1; page <= reader.NumberOfPages; page++)
-            {
-                text += PdfTextExtractor.GetTextFromPage(reader, page);
-            }
+
+            text = PdfTextExtractor.GetTextFromPage(reader, 1);
 
             reader.Close();
 

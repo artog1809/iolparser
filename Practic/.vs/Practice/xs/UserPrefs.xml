@@ -1,0 +1,29 @@
+﻿<Properties StartupConfiguration="{97E7B0D3-B853-45D0-81E8-9EE1AB78E971}|Default">
+  <MonoDevelop.Ide.ItemProperties.Practice PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Practice/PdfParser.cs">
+    <Files>
+      <File FileName="Practice/Program.cs" Line="13" Column="63" />
+      <File FileName="Practice/PdfParser.cs" Line="102" Column="13" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Practice" expanded="True">
+            <Node name="Practice" expanded="True">
+              <Node name="Dependencies" expanded="True" />
+              <Node name="PdfParser.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/artyom/Documents/Artem/IOLparser/Practic/Practice/PdfParser.cs" relfile="Practice/PdfParser.cs" line="97" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+</Properties>

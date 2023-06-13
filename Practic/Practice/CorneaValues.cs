@@ -1,11 +1,12 @@
 ﻿using System;
-namespace Practice
-{
-	public class CorneaValues
-	{
-		public CorneaValues()
-		{
-		}
-	}
-}
+
+namespace Practice;
+
+public record CorneaValues(double Dptr, int? Degrees);
+
+	
+
+
+
+
 
