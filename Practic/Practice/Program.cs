@@ -13,14 +13,23 @@ namespace Practice
             string[] word = input[2].Split(new char[] { ' ' });
 
             Patient newPatient = new Patient(input[1], DateTime.Parse(word[2]), word[4], input[5]);
+            
+            var (eye1, eye2) = PdfParser.ParseFourthPage();
 
-            File.WriteAllText("patient.json", JsonConvert.SerializeObject(newPatient));
-
-
+            var fileName = "patient.json";
+            
+            File.WriteAllText(fileName, "// Информация о пациенте\n");
+            File.AppendAllText(fileName, JsonConvert.SerializeObject(newPatient));
+            
+            File.AppendAllText(fileName, "\n// Левый глаз\n");
+            File.AppendAllText(fileName, JsonConvert.SerializeObject(eye1));
+            
+            File.AppendAllText(fileName, "\n// Правый глаз\n");
+            File.AppendAllText(fileName, JsonConvert.SerializeObject(eye2));
+            
             Console.WriteLine(newPatient.Name + "\n" + newPatient.BirthDate + "\n" + newPatient.Sex + "\n" +
                               newPatient.PatientId);
         }
-
 
         public static string[] pdfReading()
         {
