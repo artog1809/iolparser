@@ -47,7 +47,7 @@ public class PdfParser
         string[] result = DataFormatting(arr, "Total Keratometry", "right");
 
 
-        // Заполнить JSON файл данными класса TotalKeratometery
+        // Заполнить JSON файл данными класса TotalKeratometery для правого глаза
         TotalKeratometery totalKeratometery = new TotalKeratometery(result[0], result[1], result[2], result[3], result[4],
                                                                     result[5], result[6], result[7], result[8],
                                                                     result[9], result[10], result[11], result[12]);
@@ -58,6 +58,8 @@ public class PdfParser
 
         result = DataFormatting(arr, "Total Keratometry", "left");
 
+
+        // Заполнить JSON файл данными класса TotalKeratometery для левого глаза
         TotalKeratometery totalKeratometeryLeft = new TotalKeratometery(result[0], result[1], result[2], result[3], result[4],
                                                                     result[5], result[6], result[7], result[8],
                                                                     result[9], result[10], result[11], result[12]);
@@ -70,7 +72,7 @@ public class PdfParser
     {
         string[] result = DataFormatting(arr, "Значения задней поверхности роговицы", "right");
 
-        // Заполнить JSON файл данными класса TotalKeratometery
+        // Заполнить JSON файл данными класса CorneaBackSurface для правого глаза
         CorneaBackSurface corneaBackSurface = new CorneaBackSurface(result[0], result[1], result[2], result[3], result[4],
                                                                     result[5], result[6], result[7], result[8],
                                                                     result[9], result[10], result[11], result[12]);
@@ -80,7 +82,7 @@ public class PdfParser
 
         result = DataFormatting(arr, "Значения задней поверхности роговицы", "left");
 
-        // Заполнить JSON файл данными класса TotalKeratometery
+        // Заполнить JSON файл данными класса CorneaBackSurface для левого глаза
         CorneaBackSurface corneaBackSurfaceLeft = new CorneaBackSurface(result[0], result[1], result[2], result[3], result[4],
                                                                     result[5], result[6], result[7], result[8],
                                                                     result[9], result[10], result[11], result[12]);
@@ -94,6 +96,7 @@ public class PdfParser
 
         string[] result = DataFormatting(arr, "Прочие значения", "right");
 
+        // Заполнить JSON файл данными класса OtherValues для правого глаза
         OtherValues otherValues = new OtherValues(result[0], result[1], result[2], result[3], result[4], result[5], result[6]);
 
         File.AppendAllText("patient.json", "\n" + "//Прочие значения для правого глаза");
@@ -101,6 +104,8 @@ public class PdfParser
 
         result = DataFormatting(arr, "Прочие значения", "left");
 
+
+        // Заполнить JSON файл данными класса OtherValues для левого глаза
         OtherValues otherValuesLeft = new OtherValues(result[0], result[1], result[2], result[3], result[4], result[5], result[6]);
 
         File.AppendAllText("patient.json", "\n" + "//Прочие значения для левого глаза");
@@ -114,13 +119,15 @@ public class PdfParser
     {
         string[] arr_copy = arr;
 
-
+        // Поиск нужного блока на странице
         int flagOfBegin = 0;
         for (int i = 0; arr_copy[i] != nameOfBlock; i++)
         {
             flagOfBegin = i;
         }
 
+
+        // Удалить строки до нужного блока
         for (int i = 0; i <= flagOfBegin; i++)
         {
             arr_copy[i] = string.Empty;
@@ -130,6 +137,7 @@ public class PdfParser
         {
             int flagOfEnd = flagOfBegin + 9;
 
+            // Удалить строки после нужного блока
             for (int i = flagOfEnd; i < arr_copy.Length; i++)
             {
                 arr_copy[i] = string.Empty;
@@ -138,11 +146,14 @@ public class PdfParser
 
             arr_copy = arr_copy.Where(x => !string.IsNullOrEmpty(x)).ToArray();
 
+            
 
-
+            // Удалить часть строки, в зависимости от глаза
             for (int i = 1; i < arr_copy.Length; i++)
             {
+                int freq = arr_copy[i].Where(x => (x == ':')).Count();
                 if (eye == "right")
+                    if (freq > 3)
                     arr_copy[i] = arr_copy[i].Substring(0, arr_copy[i].Length / 2);
                 else
                     arr_copy[i] = arr_copy[i].Substring(arr_copy[i].Length/2);
@@ -173,6 +184,8 @@ public class PdfParser
         }
         else
         {
+
+            // Удалить строки после нужного блока
             int flagOfEnd = flagOfBegin + 6;
 
             for (int i = flagOfEnd; i < arr_copy.Length; i++)
@@ -183,7 +196,7 @@ public class PdfParser
 
             arr_copy = arr_copy.Where(x => !string.IsNullOrEmpty(x)).ToArray();
 
-
+            // Удалить часть строки, в зависимости от глаза 
             for (int i = 1; i < arr_copy.Length; i++)
             {
                 if (eye == "right")
@@ -198,7 +211,8 @@ public class PdfParser
 
             index = arr_copy[1].LastIndexOf(':');
 
-            
+
+            // Выделить в каждую строку подстроки формата "AA: 'значение'"
             for (int j = index; arr_copy[1][j] != ' '; j--)
             {
                 indexOfSpace = j;
@@ -253,7 +267,8 @@ public class PdfParser
             result = result.Concat(result1).ToArray();
         }
 
-      
+
+        // Дополнительное форматирование текста для блока "Прочие значения"
         if (nameOfBlock == "Прочие значения")
         {
             string buff = result[6];
@@ -278,6 +293,7 @@ public class PdfParser
 
         }
 
+        // Привести текст к удобному виду, для парсинга в json
         for (int i = 0; i < result.Length; i++)
         {
             int index = result[i].LastIndexOf(':');
