@@ -8,7 +8,6 @@ namespace Practice;
 
 public class PdfParser
 {
-
     // Функция для парсинга пятой страницы файла
     public static void FifthPageParser()
     {
@@ -19,10 +18,11 @@ public class PdfParser
 
         text = PdfTextExtractor.GetTextFromPage(reader, 5);
 
-
         // Разбиение на строки
         string[] arr = text.Split(new char[] { '\n' });
 
+        // Парсинг блока "Значения роговицы"
+        CorneaValuesParsing(arr.Skip(20).ToArray());
 
         // Парсинг блока "Total Keratometry"
         TotalKeratometeryParsing(arr);
@@ -37,30 +37,50 @@ public class PdfParser
         // Парсинг блока "Прочие значения"
 
         OtherValueParsing(arr);
-
     }
 
-    //Функция для парсинга блока "Total Kerotemetry"
+    // Функция для парсинга блока "Значения роговицы"
+    public static void CorneaValuesParsing(string[] arr)
+    {
+        string[] result = DataFormatting(arr, "Значения роговицы", "right");
+
+        Cornea corneaRight = new Cornea(result[0], result[1], result[2], result[3], result[4],
+            result[5], result[6], result[7], result[8],
+            result[9], result[10], result[11], result[12]);
+
+        File.AppendAllText("patient.json", "\n" + "// Значения роговицы для правого глаза");
+        File.AppendAllText("patient.json", "\n" + JsonConvert.SerializeObject(corneaRight));
+
+        result = DataFormatting(arr, "Значения роговицы", "left");
+
+        Cornea corneaLeft = new Cornea(result[0], result[1], result[2], result[3], result[4],
+            result[5], result[6], result[7], result[8],
+            result[9], result[10], result[11], result[12]);
+
+        File.AppendAllText("patient.json", "\n" + "// Значения роговицы для левого глаза");
+        File.AppendAllText("patient.json", "\n" + JsonConvert.SerializeObject(corneaLeft));
+    }
+
+    // Функция для парсинга блока "Total Kerotemetry"
     public static void TotalKeratometeryParsing(string[] arr)
     {
-        
         string[] result = DataFormatting(arr, "Total Keratometry", "right");
 
-
         // Заполнить JSON файл данными класса TotalKeratometery
-        TotalKeratometery totalKeratometery = new TotalKeratometery(result[0], result[1], result[2], result[3], result[4],
-                                                                    result[5], result[6], result[7], result[8],
-                                                                    result[9], result[10], result[11], result[12]);
+        TotalKeratometery totalKeratometery = new TotalKeratometery(result[0], result[1], result[2], result[3],
+            result[4],
+            result[5], result[6], result[7], result[8],
+            result[9], result[10], result[11], result[12]);
 
         File.AppendAllText("patient.json", "\n" + "//TotalKeratometry для правого глаза");
         File.AppendAllText("patient.json", "\n" + JsonConvert.SerializeObject(totalKeratometery));
 
-
         result = DataFormatting(arr, "Total Keratometry", "left");
 
-        TotalKeratometery totalKeratometeryLeft = new TotalKeratometery(result[0], result[1], result[2], result[3], result[4],
-                                                                    result[5], result[6], result[7], result[8],
-                                                                    result[9], result[10], result[11], result[12]);
+        TotalKeratometery totalKeratometeryLeft = new TotalKeratometery(result[0], result[1], result[2], result[3],
+            result[4],
+            result[5], result[6], result[7], result[8],
+            result[9], result[10], result[11], result[12]);
 
         File.AppendAllText("patient.json", "\n" + "//TotalKeratometry для левого глаза");
         File.AppendAllText("patient.json", "\n" + JsonConvert.SerializeObject(totalKeratometeryLeft));
@@ -71,9 +91,10 @@ public class PdfParser
         string[] result = DataFormatting(arr, "Значения задней поверхности роговицы", "right");
 
         // Заполнить JSON файл данными класса TotalKeratometery
-        CorneaBackSurface corneaBackSurface = new CorneaBackSurface(result[0], result[1], result[2], result[3], result[4],
-                                                                    result[5], result[6], result[7], result[8],
-                                                                    result[9], result[10], result[11], result[12]);
+        CorneaBackSurface corneaBackSurface = new CorneaBackSurface(result[0], result[1], result[2], result[3],
+            result[4],
+            result[5], result[6], result[7], result[8],
+            result[9], result[10], result[11], result[12]);
 
         File.AppendAllText("patient.json", "\n" + "//Значения задней поверхности роговицы для правого глаза");
         File.AppendAllText("patient.json", "\n" + JsonConvert.SerializeObject(corneaBackSurface));
@@ -81,9 +102,10 @@ public class PdfParser
         result = DataFormatting(arr, "Значения задней поверхности роговицы", "left");
 
         // Заполнить JSON файл данными класса TotalKeratometery
-        CorneaBackSurface corneaBackSurfaceLeft = new CorneaBackSurface(result[0], result[1], result[2], result[3], result[4],
-                                                                    result[5], result[6], result[7], result[8],
-                                                                    result[9], result[10], result[11], result[12]);
+        CorneaBackSurface corneaBackSurfaceLeft = new CorneaBackSurface(result[0], result[1], result[2], result[3],
+            result[4],
+            result[5], result[6], result[7], result[8],
+            result[9], result[10], result[11], result[12]);
 
         File.AppendAllText("patient.json", "\n" + "//Значения задней поверхности роговицы для левого глаза");
         File.AppendAllText("patient.json", "\n" + JsonConvert.SerializeObject(corneaBackSurfaceLeft));
@@ -91,22 +113,21 @@ public class PdfParser
 
     public static void OtherValueParsing(string[] arr)
     {
-
         string[] result = DataFormatting(arr, "Прочие значения", "right");
 
-        OtherValues otherValues = new OtherValues(result[0], result[1], result[2], result[3], result[4], result[5], result[6]);
+        OtherValues otherValues =
+            new OtherValues(result[0], result[1], result[2], result[3], result[4], result[5], result[6]);
 
         File.AppendAllText("patient.json", "\n" + "//Прочие значения для правого глаза");
         File.AppendAllText("patient.json", "\n" + JsonConvert.SerializeObject(otherValues));
 
         result = DataFormatting(arr, "Прочие значения", "left");
 
-        OtherValues otherValuesLeft = new OtherValues(result[0], result[1], result[2], result[3], result[4], result[5], result[6]);
+        OtherValues otherValuesLeft =
+            new OtherValues(result[0], result[1], result[2], result[3], result[4], result[5], result[6]);
 
         File.AppendAllText("patient.json", "\n" + "//Прочие значения для левого глаза");
         File.AppendAllText("patient.json", "\n" + JsonConvert.SerializeObject(otherValuesLeft));
-
-
     }
 
 
@@ -126,27 +147,46 @@ public class PdfParser
             arr_copy[i] = string.Empty;
         }
 
-        if(nameOfBlock != "Прочие значения")
+        if (nameOfBlock != "Прочие значения")
         {
+            if (nameOfBlock == "Значения роговицы" && eye == "right")
+            {
+                arr_copy[10] = arr_copy[11];
+            }
+
             int flagOfEnd = flagOfBegin + 9;
 
             for (int i = flagOfEnd; i < arr_copy.Length; i++)
             {
                 arr_copy[i] = string.Empty;
-
             }
 
             arr_copy = arr_copy.Where(x => !string.IsNullOrEmpty(x)).ToArray();
 
-
-
             for (int i = 1; i < arr_copy.Length; i++)
             {
                 if (eye == "right")
-                    arr_copy[i] = arr_copy[i].Substring(0, arr_copy[i].Length / 2);
+                {
+                    if (nameOfBlock == "Значения роговицы" && i == 1)
+                    {
+                        arr_copy[i] = arr_copy[i].Substring(0, arr_copy[i].Length / 2 + 1);
+                    }
+                    else
+                    {
+                        arr_copy[i] = arr_copy[i].Substring(0, arr_copy[i].Length / 2);
+                    }
+                }
                 else
-                    arr_copy[i] = arr_copy[i].Substring(arr_copy[i].Length/2);
-
+                {
+                    if (nameOfBlock == "Значения роговицы" && i == 1)
+                    {
+                        arr_copy[i] = arr_copy[i].Substring(arr_copy[i].Length / 2 + 1);
+                    }
+                    else
+                    {
+                        arr_copy[i] = arr_copy[i].Substring(arr_copy[i].Length / 2);
+                    }
+                }
             }
 
             int index = 0;
@@ -165,11 +205,8 @@ public class PdfParser
                     }
 
                     arr_copy[i] = arr_copy[i].Remove(indexOfSpace - 1, 1).Insert(indexOfSpace - 1, '.'.ToString());
-
                 }
-
             }
-
         }
         else
         {
@@ -178,7 +215,6 @@ public class PdfParser
             for (int i = flagOfEnd; i < arr_copy.Length; i++)
             {
                 arr_copy[i] = string.Empty;
-
             }
 
             arr_copy = arr_copy.Where(x => !string.IsNullOrEmpty(x)).ToArray();
@@ -190,7 +226,6 @@ public class PdfParser
                     arr_copy[i] = arr_copy[i].Substring(0, arr_copy[i].Length / 2);
                 else
                     arr_copy[i] = arr_copy[i].Substring((arr_copy[i].Length / 2));
-
             }
 
             int index = 0;
@@ -198,7 +233,7 @@ public class PdfParser
 
             index = arr_copy[1].LastIndexOf(':');
 
-            
+
             for (int j = index; arr_copy[1][j] != ' '; j--)
             {
                 indexOfSpace = j;
@@ -206,13 +241,14 @@ public class PdfParser
 
             arr_copy[1] = arr_copy[1].Remove(indexOfSpace - 1, 1).Insert(indexOfSpace - 1, '.'.ToString());
 
-            
+
             index = arr_copy[2].IndexOf("x: ");
 
             for (int j = index; arr_copy[2][j] != ' '; j--)
             {
                 indexOfSpace = j;
             }
+
             arr_copy[2] = arr_copy[2].Remove(indexOfSpace - 1, 1).Insert(indexOfSpace - 1, '.'.ToString());
 
             index = arr_copy[2].IndexOf("y: ");
@@ -221,11 +257,10 @@ public class PdfParser
             {
                 indexOfSpace = j;
             }
-            arr_copy[2] = arr_copy[2].Remove(indexOfSpace - 1, 1).Insert(indexOfSpace - 1, '.'.ToString());
 
+            arr_copy[2] = arr_copy[2].Remove(indexOfSpace - 1, 1).Insert(indexOfSpace - 1, '.'.ToString());
         }
 
-        
 
         // Буферные массивы для вспомоготальных действий
         string[] word = Array.Empty<string>();
@@ -253,7 +288,7 @@ public class PdfParser
             result = result.Concat(result1).ToArray();
         }
 
-      
+
         if (nameOfBlock == "Прочие значения")
         {
             string buff = result[6];
@@ -275,7 +310,6 @@ public class PdfParser
             result[5] = result[5].Insert(2, word[0]);
 
             result[6] = result[6].Insert(9, word[1]);
-
         }
 
         for (int i = 0; i < result.Length; i++)
@@ -287,13 +321,10 @@ public class PdfParser
                 if (result[i][0] == ' ')
                 {
                     result[i] = result[i].Remove(0, 1);
-
                 }
             }
         }
 
         return result;
-
     }
-
 }
