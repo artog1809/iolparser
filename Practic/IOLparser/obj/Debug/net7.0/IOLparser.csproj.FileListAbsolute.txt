@@ -1,0 +1,12 @@
+/Users/artyom/Documents/Artem/IOLparser/Practic/IOLparser/bin/Debug/net7.0/IOLparser.deps.json
+/Users/artyom/Documents/Artem/IOLparser/Practic/IOLparser/bin/Debug/net7.0/IOLparser.dll
+/Users/artyom/Documents/Artem/IOLparser/Practic/IOLparser/bin/Debug/net7.0/IOLparser.pdb
+/Users/artyom/Documents/Artem/IOLparser/Practic/IOLparser/obj/Debug/net7.0/IOLparser.csproj.AssemblyReference.cache
+/Users/artyom/Documents/Artem/IOLparser/Practic/IOLparser/obj/Debug/net7.0/IOLparser.GeneratedMSBuildEditorConfig.editorconfig
+/Users/artyom/Documents/Artem/IOLparser/Practic/IOLparser/obj/Debug/net7.0/IOLparser.AssemblyInfoInputs.cache
+/Users/artyom/Documents/Artem/IOLparser/Practic/IOLparser/obj/Debug/net7.0/IOLparser.AssemblyInfo.cs
+/Users/artyom/Documents/Artem/IOLparser/Practic/IOLparser/obj/Debug/net7.0/IOLparser.csproj.CoreCompileInputs.cache
+/Users/artyom/Documents/Artem/IOLparser/Practic/IOLparser/obj/Debug/net7.0/IOLparser.dll
+/Users/artyom/Documents/Artem/IOLparser/Practic/IOLparser/obj/Debug/net7.0/refint/IOLparser.dll
+/Users/artyom/Documents/Artem/IOLparser/Practic/IOLparser/obj/Debug/net7.0/IOLparser.pdb
+/Users/artyom/Documents/Artem/IOLparser/Practic/IOLparser/obj/Debug/net7.0/ref/IOLparser.dll
