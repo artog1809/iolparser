@@ -1,12 +1,19 @@
 ﻿using System;
 namespace Practice;
 
-
-public record CorneaBackSurface(string PSE, string SD1,
-                                 string PK1, string SD2,
-                                 string PK2, string SD3,
-                                 string DPK,
-                                 string PSE1, string DPK1,
-                                 string PSE2, string DPK2,
-                                 string PSE3, string DPK3);
-
+public class CorneaBackSurface
+{
+    public string PSE { get; set; }
+    public string SD1 { get; set; }
+    public string PK1 { get; set; }
+    public string SD2 { get; set; }
+    public string PK2 { get; set; }
+    public string SD3 { get; set; }
+    public string DPK { get; set; }
+    public string PSE1 { get; set; }
+    public string DPK1 { get; set; }
+    public string PSE2 { get; set; }
+    public string DPK2 { get; set; }
+    public string PSE3 { get; set; }
+    public string DPK3 { get; set; }
+}

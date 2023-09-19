@@ -1,16 +1,21 @@
 ﻿<Properties StartupConfiguration="{97E7B0D3-B853-45D0-81E8-9EE1AB78E971}|Default">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.ItemProperties.Practice PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Practice/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="IOLparser1.1/PdfParser.cs">
     <Files>
-      <File FileName="IOLparser/Program.cs" Line="8" Column="6" />
-      <File FileName="IOLparser/PdfParser.cs" Line="292" Column="1" />
-      <File FileName="Practice/Program.cs" Line="27" Column="1" />
+      <File FileName="IOLparser1.1/Program.cs" Line="20" Column="56" />
+      <File FileName="IOLparser1.1/PdfParser.cs" Line="30" Column="18" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Practice" expanded="True" selected="True" />
+          <Node name="Practice" expanded="True">
+            <Node name="IOLparser" expanded="True" />
+            <Node name="IOLparser1.1" expanded="True">
+              <Node name="TotalKeratometery.cs" selected="True" />
+            </Node>
+            <Node name="Practice" expanded="True" />
+          </Node>
         </State>
       </Pad>
     </Pads>
