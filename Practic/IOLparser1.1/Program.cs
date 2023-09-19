@@ -12,13 +12,19 @@ namespace IOLparser1._1
             string[] input = pdfReading(path);
             string[] word = input[2].Split(new char[] { ' ' });
 
-            Patient newPatient = new Patient(input[1], word[2], word[4], input[5]);
+            PdfParser.FifthPageParser(path, gd);
 
-            string output_name = path.Remove(path.Length - 3) + "json";
+            Patient newPatient = new Patient
+            {
+                Name = input[1],
+                BirthDate = word[2],
+                Sex = word[4],
+                PatientId = input[5]
+            };
 
-            File.WriteAllText(output_name, JsonConvert.SerializeObject(newPatient));
+            gd.patient = newPatient;
 
-            PdfParser.FifthPageParser(path, output_name, gd);
+            PdfParser.FifthPageParser(path, gd);
         }
 
         public static string[] pdfReading(string path)

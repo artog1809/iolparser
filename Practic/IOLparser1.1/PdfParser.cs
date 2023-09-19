@@ -11,7 +11,7 @@ namespace IOLparser1._1;
 public class PdfParser
 {
     // Функция для парсинга пятой страницы файла
-    public static void FifthPageParser(string path, string output_name, GeneralData gd)
+    public static void FifthPageParser(string path, GeneralData gd)
     {
         // Считывание текста из файла
         PdfReader reader = new PdfReader(path);
@@ -24,21 +24,21 @@ public class PdfParser
         string[] arr = text.Split(new char[] { '\n' });
 
         // Парсинг блока "Значения роговицы"
-        CorneaValuesParsing(arr.Skip(20).ToArray(),output_name, gd);
+        CorneaValuesParsing(arr.Skip(20).ToArray(), gd);
 
         // Парсинг блока "Total Keratometry"
-        TotalKeratometeryParsing(arr,output_name, gd);
+        TotalKeratometeryParsing(arr, gd);
 
         arr = text.Split(new char[] { '\n' });
 
         // Парсинг блока "Значения задней поверхности роговицы"
-        CorneaBackSurfaceParsing(arr,output_name, gd);
+        CorneaBackSurfaceParsing(arr, gd);
 
         arr = text.Split(new char[] { '\n' });
 
         // Парсинг блока "Прочие значения"
 
-        OtherValueParsing(arr,output_name, gd);
+        OtherValueParsing(arr, gd);
 
 
         JsonSerializerOptions options = new JsonSerializerOptions
@@ -49,12 +49,11 @@ public class PdfParser
 
         string jsonString = System.Text.Json.JsonSerializer.Serialize(gd, options);
 
-
-        File.WriteAllText(output_name, jsonString);
+        File.WriteAllText(path.Remove(path.Length - 3) + "json", jsonString);
     }
 
     // Функция для парсинга блока "Значения роговицы"
-    public static void CorneaValuesParsing(string[] arr, string output_name, GeneralData gd)
+    public static void CorneaValuesParsing(string[] arr, GeneralData gd)
     {
         string[] result = DataFormatting(arr, "Значения роговицы", "right");
 
@@ -102,7 +101,7 @@ public class PdfParser
     }
 
     // Функция для парсинга блока "Total Kerotemetry"
-    public static void TotalKeratometeryParsing(string[] arr, string output_name, GeneralData gd)
+    public static void TotalKeratometeryParsing(string[] arr, GeneralData gd)
     {
         string[] result = DataFormatting(arr, "Total Keratometry", "right");
 
@@ -149,7 +148,7 @@ public class PdfParser
         gd.TotalKeratometeryOS = TotalKeratometeryOS;
     }
 
-    public static void CorneaBackSurfaceParsing(string[] arr, string output_name, GeneralData gd)
+    public static void CorneaBackSurfaceParsing(string[] arr, GeneralData gd)
     {
         string[] result = DataFormatting(arr, "Значения задней поверхности роговицы", "right");
 
@@ -196,7 +195,7 @@ public class PdfParser
         gd.zadRogovicaOS = zadRogovicaOS;
     }
 
-    public static void OtherValueParsing(string[] arr, string output_name, GeneralData gd)
+    public static void OtherValueParsing(string[] arr, GeneralData gd)
     {
         string[] result = DataFormatting(arr, "Прочие значения", "right");
 
