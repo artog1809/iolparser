@@ -111,11 +111,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/artyom/Documents/Artem/IOLparser/Practic/Practice/Practice.csproj",
+      "projectUniqueName": "/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/Practice/Practice.csproj",
       "projectName": "Practice",
-      "projectPath": "/Users/artyom/Documents/Artem/IOLparser/Practic/Practice/Practice.csproj",
+      "projectPath": "/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/Practice/Practice.csproj",
       "packagesPath": "/Users/artyom/.nuget/packages/",
-      "outputPath": "/Users/artyom/Documents/Artem/IOLparser/Practic/Practice/obj/",
+      "outputPath": "/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/Practice/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/artyom/.nuget/NuGet/NuGet.Config"

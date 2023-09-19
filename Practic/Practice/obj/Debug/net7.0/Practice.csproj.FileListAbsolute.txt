@@ -38,3 +38,22 @@ D:/Coding/Универ/Практика/iolparser/Practic/Practice/bin/Debug/net
 /Users/artyom/Documents/Artem/IOLparser/Practic/Practice/obj/Debug/net7.0/Practice.pdb
 /Users/artyom/Documents/Artem/IOLparser/Practic/Practice/obj/Debug/net7.0/Practice.genruntimeconfig.cache
 /Users/artyom/Documents/Artem/IOLparser/Practic/Practice/obj/Debug/net7.0/ref/Practice.dll
+/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/Practice/bin/Debug/net7.0/Practice
+/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/Practice/bin/Debug/net7.0/Practice.deps.json
+/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/Practice/bin/Debug/net7.0/Practice.runtimeconfig.json
+/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/Practice/bin/Debug/net7.0/Practice.dll
+/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/Practice/bin/Debug/net7.0/Practice.pdb
+/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/Practice/bin/Debug/net7.0/BouncyCastle.Crypto.dll
+/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/Practice/bin/Debug/net7.0/itextsharp.dll
+/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/Practice/bin/Debug/net7.0/Newtonsoft.Json.dll
+/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/Practice/obj/Debug/net7.0/Practice.csproj.AssemblyReference.cache
+/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/Practice/obj/Debug/net7.0/Practice.GeneratedMSBuildEditorConfig.editorconfig
+/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/Practice/obj/Debug/net7.0/Practice.AssemblyInfoInputs.cache
+/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/Practice/obj/Debug/net7.0/Practice.AssemblyInfo.cs
+/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/Practice/obj/Debug/net7.0/Practice.csproj.CoreCompileInputs.cache
+/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/Practice/obj/Debug/net7.0/Practice.csproj.CopyComplete
+/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/Practice/obj/Debug/net7.0/Practice.dll
+/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/Practice/obj/Debug/net7.0/refint/Practice.dll
+/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/Practice/obj/Debug/net7.0/Practice.pdb
+/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/Practice/obj/Debug/net7.0/Practice.genruntimeconfig.cache
+/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/Practice/obj/Debug/net7.0/ref/Practice.dll

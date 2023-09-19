@@ -1,31 +1,23 @@
 ﻿<Properties StartupConfiguration="{97E7B0D3-B853-45D0-81E8-9EE1AB78E971}|Default">
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="IOLparser/Program.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Practice PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Practice/Program.cs">
     <Files>
-      <File FileName="IOLparser/Cornea.cs" />
-      <File FileName="IOLparser/CorneaBackSurface.cs" />
-      <File FileName="IOLparser/CorneaValues.cs" />
-      <File FileName="IOLparser/OtherValues.cs" />
-      <File FileName="IOLparser/Patient.cs" />
-      <File FileName="IOLparser/PdfParser.cs" />
-      <File FileName="IOLparser/Program.cs" Line="19" Column="10" />
+      <File FileName="IOLparser/Program.cs" Line="8" Column="6" />
+      <File FileName="IOLparser/PdfParser.cs" Line="292" Column="1" />
+      <File FileName="Practice/Program.cs" Line="27" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Practice" expanded="True">
-            <Node name="IOLparser" expanded="True">
-              <Node name="Program.cs" selected="True" />
-            </Node>
-          </Node>
+          <Node name="Practice" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Practice PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
 </Properties>

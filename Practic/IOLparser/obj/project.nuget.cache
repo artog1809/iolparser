@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JAAFqyDwCPIFlGDndEcHIOskRlc5zbZ4YFBwcpRGKoSll/Ojg2ln9jr9rDIlOLy7It3vCocSbvLMp9DR4FoR9A==",
+  "dgSpecHash": "tqFtEOgwXk/M2QqTIPUoKkOHDWl9+KbTLz4iOZ9FVzgBZCJubJ7ZRyFnPC+4GZoXLpiOszwWIzLkSqmOBPVZZw==",
   "success": true,
-  "projectFilePath": "/Users/artyom/Documents/Artem/IOLparser/Practic/IOLparser/IOLparser.csproj",
+  "projectFilePath": "/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/IOLparser/IOLparser.csproj",
   "expectedPackageFiles": [
     "/Users/artyom/.nuget/packages/bouncycastle/1.8.9/bouncycastle.1.8.9.nupkg.sha512",
     "/Users/artyom/.nuget/packages/itextsharp/5.5.13.3/itextsharp.5.5.13.3.nupkg.sha512",

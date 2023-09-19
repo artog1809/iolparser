@@ -18,7 +18,6 @@ namespace IOLparser
             PdfParser.FifthPageParser(path);
         }
 
-
         public static string[] pdfReading(string path)
         {   
             PdfReader reader = new PdfReader(path);

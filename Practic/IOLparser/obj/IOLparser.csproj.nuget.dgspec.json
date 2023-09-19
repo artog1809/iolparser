@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/artyom/Documents/Artem/IOLparser/Practic/IOLparser/IOLparser.csproj": {}
+    "/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/IOLparser/IOLparser.csproj": {}
   },
   "projects": {
-    "/Users/artyom/Documents/Artem/IOLparser/Practic/IOLparser/IOLparser.csproj": {
+    "/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/IOLparser/IOLparser.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/artyom/Documents/Artem/IOLparser/Practic/IOLparser/IOLparser.csproj",
+        "projectUniqueName": "/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/IOLparser/IOLparser.csproj",
         "projectName": "IOLparser",
-        "projectPath": "/Users/artyom/Documents/Artem/IOLparser/Practic/IOLparser/IOLparser.csproj",
+        "projectPath": "/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/IOLparser/IOLparser.csproj",
         "packagesPath": "/Users/artyom/.nuget/packages/",
-        "outputPath": "/Users/artyom/Documents/Artem/IOLparser/Practic/IOLparser/obj/",
+        "outputPath": "/Users/artyom/Documents/Artem/Летняя практика/IOLparser/Practic/IOLparser/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/artyom/.nuget/NuGet/NuGet.Config"

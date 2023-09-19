@@ -8,11 +8,12 @@ namespace Practice;
 
 public class PdfParser
 {
+    public static string output_name = "test1.json";
     // Функция для парсинга пятой страницы файла
     public static void FifthPageParser()
     {
         // Считывание текста из файла
-        PdfReader reader = new PdfReader("dip.pdf");
+        PdfReader reader = new PdfReader("test1.pdf");
 
         string text = string.Empty;
 
@@ -48,8 +49,8 @@ public class PdfParser
             result[5], result[6], result[7], result[8],
             result[9], result[10], result[11], result[12]);
 
-        File.AppendAllText("patient.json", "\n" + "// Значения роговицы для правого глаза");
-        File.AppendAllText("patient.json", "\n" + JsonConvert.SerializeObject(corneaRight));
+        File.AppendAllText(output_name, "\n" + "// Значения роговицы для правого глаза");
+        File.AppendAllText(output_name, "\n" + JsonConvert.SerializeObject(corneaRight));
 
         result = DataFormatting(arr, "Значения роговицы", "left");
 
@@ -57,8 +58,8 @@ public class PdfParser
             result[5], result[6], result[7], result[8],
             result[9], result[10], result[11], result[12]);
 
-        File.AppendAllText("patient.json", "\n" + "// Значения роговицы для левого глаза");
-        File.AppendAllText("patient.json", "\n" + JsonConvert.SerializeObject(corneaLeft));
+        File.AppendAllText(output_name, "\n" + "// Значения роговицы для левого глаза");
+        File.AppendAllText(output_name, "\n" + JsonConvert.SerializeObject(corneaLeft));
     }
 
     // Функция для парсинга блока "Total Kerotemetry"
@@ -72,8 +73,8 @@ public class PdfParser
             result[5], result[6], result[7], result[8],
             result[9], result[10], result[11], result[12]);
 
-        File.AppendAllText("patient.json", "\n" + "//TotalKeratometry для правого глаза");
-        File.AppendAllText("patient.json", "\n" + JsonConvert.SerializeObject(totalKeratometery));
+        File.AppendAllText(output_name, "\n" + "//TotalKeratometry для правого глаза");
+        File.AppendAllText(output_name, "\n" + JsonConvert.SerializeObject(totalKeratometery));
 
         result = DataFormatting(arr, "Total Keratometry", "left");
 
@@ -82,8 +83,8 @@ public class PdfParser
             result[5], result[6], result[7], result[8],
             result[9], result[10], result[11], result[12]);
 
-        File.AppendAllText("patient.json", "\n" + "//TotalKeratometry для левого глаза");
-        File.AppendAllText("patient.json", "\n" + JsonConvert.SerializeObject(totalKeratometeryLeft));
+        File.AppendAllText(output_name, "\n" + "//TotalKeratometry для левого глаза");
+        File.AppendAllText(output_name, "\n" + JsonConvert.SerializeObject(totalKeratometeryLeft));
     }
 
     public static void CorneaBackSurfaceParsing(string[] arr)
@@ -96,8 +97,8 @@ public class PdfParser
             result[5], result[6], result[7], result[8],
             result[9], result[10], result[11], result[12]);
 
-        File.AppendAllText("patient.json", "\n" + "//Значения задней поверхности роговицы для правого глаза");
-        File.AppendAllText("patient.json", "\n" + JsonConvert.SerializeObject(corneaBackSurface));
+        File.AppendAllText(output_name, "\n" + "//Значения задней поверхности роговицы для правого глаза");
+        File.AppendAllText(output_name, "\n" + JsonConvert.SerializeObject(corneaBackSurface));
 
         result = DataFormatting(arr, "Значения задней поверхности роговицы", "left");
 
@@ -107,8 +108,8 @@ public class PdfParser
             result[5], result[6], result[7], result[8],
             result[9], result[10], result[11], result[12]);
 
-        File.AppendAllText("patient.json", "\n" + "//Значения задней поверхности роговицы для левого глаза");
-        File.AppendAllText("patient.json", "\n" + JsonConvert.SerializeObject(corneaBackSurfaceLeft));
+        File.AppendAllText(output_name, "\n" + "//Значения задней поверхности роговицы для левого глаза");
+        File.AppendAllText(output_name, "\n" + JsonConvert.SerializeObject(corneaBackSurfaceLeft));
     }
 
     public static void OtherValueParsing(string[] arr)
@@ -118,16 +119,16 @@ public class PdfParser
         OtherValues otherValues =
             new OtherValues(result[0], result[1], result[2], result[3], result[4], result[5], result[6]);
 
-        File.AppendAllText("patient.json", "\n" + "//Прочие значения для правого глаза");
-        File.AppendAllText("patient.json", "\n" + JsonConvert.SerializeObject(otherValues));
+        File.AppendAllText(output_name, "\n" + "//Прочие значения для правого глаза");
+        File.AppendAllText(output_name, "\n" + JsonConvert.SerializeObject(otherValues));
 
         result = DataFormatting(arr, "Прочие значения", "left");
 
         OtherValues otherValuesLeft =
             new OtherValues(result[0], result[1], result[2], result[3], result[4], result[5], result[6]);
 
-        File.AppendAllText("patient.json", "\n" + "//Прочие значения для левого глаза");
-        File.AppendAllText("patient.json", "\n" + JsonConvert.SerializeObject(otherValuesLeft));
+        File.AppendAllText(output_name, "\n" + "//Прочие значения для левого глаза");
+        File.AppendAllText(output_name, "\n" + JsonConvert.SerializeObject(otherValuesLeft));
     }
 
 
@@ -146,15 +147,17 @@ public class PdfParser
         {
             arr_copy[i] = string.Empty;
         }
+        arr_copy = arr_copy.Where(x => !string.IsNullOrEmpty(x)).ToArray();
 
         if (nameOfBlock != "Прочие значения")
         {
-            if (nameOfBlock == "Значения роговицы" && eye == "right")
+            if (nameOfBlock == "Значения роговицы")
             {
-                arr_copy[10] = arr_copy[11];
+                arr_copy[7] = arr_copy[8];
+                
             }
-
-            int flagOfEnd = flagOfBegin + 9;
+           
+            int flagOfEnd =  8;
 
             for (int i = flagOfEnd; i < arr_copy.Length; i++)
             {
@@ -296,8 +299,12 @@ public class PdfParser
             word = result[5].Split(new char[] { ' ' });
 
             word = word.Where(x => !string.IsNullOrEmpty(x)).ToArray();
-            result[5] = string.Empty;
-            result[6] = string.Empty;
+           
+
+            for (int i = 5; i < result.Length; i++)
+            {
+                result[i] = string.Empty;
+            }
 
             result = result.Where(x => !string.IsNullOrEmpty(x)).ToArray();
 
