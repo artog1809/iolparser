@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Practice
+namespace IOLparser1._1
 {
 	public class GeneralData
 	{

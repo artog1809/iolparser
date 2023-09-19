@@ -1,16 +1,22 @@
 ﻿using System;
 using System.Reflection;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Text.Json;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 using Newtonsoft.Json;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Practice;
 
 public class PdfParser
 {
     public static string output_name = "test1.json";
+
+    
     // Функция для парсинга пятой страницы файла
-    public static void FifthPageParser()
+    public static void FifthPageParser(GeneralData gd)
     {
         // Считывание текста из файла
         PdfReader reader = new PdfReader("test1.pdf");
@@ -23,25 +29,39 @@ public class PdfParser
         string[] arr = text.Split(new char[] { '\n' });
 
         // Парсинг блока "Значения роговицы"
-        CorneaValuesParsing(arr.Skip(20).ToArray());
+        CorneaValuesParsing(arr.Skip(20).ToArray(), gd);
 
         // Парсинг блока "Total Keratometry"
-        TotalKeratometeryParsing(arr);
+        TotalKeratometeryParsing(arr, gd);
 
         arr = text.Split(new char[] { '\n' });
 
         // Парсинг блока "Значения задней поверхности роговицы"
-        CorneaBackSurfaceParsing(arr);
+        CorneaBackSurfaceParsing(arr, gd);
 
         arr = text.Split(new char[] { '\n' });
 
         // Парсинг блока "Прочие значения"
 
-        OtherValueParsing(arr);
+        OtherValueParsing(arr, gd);
+        
+
+        JsonSerializerOptions options = new JsonSerializerOptions
+        {
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+            WriteIndented = true
+        };
+
+        string jsonString = System.Text.Json.JsonSerializer.Serialize(gd, options);
+
+
+        File.WriteAllText(output_name,jsonString);
+
+
     }
 
     // Функция для парсинга блока "Значения роговицы"
-    public static void CorneaValuesParsing(string[] arr)
+    public static void CorneaValuesParsing(string[] arr, GeneralData gd)
     {
         string[] result = DataFormatting(arr, "Значения роговицы", "right");
 
@@ -63,7 +83,6 @@ public class PdfParser
         };
 
         
-        File.AppendAllText(output_name, "\n" + JsonConvert.SerializeObject(rogovicaOD));
 
         result = DataFormatting(arr, "Значения роговицы", "left");
 
@@ -84,11 +103,13 @@ public class PdfParser
             DK3 = result[12]
         };
 
-        File.AppendAllText(output_name, "\n" + JsonConvert.SerializeObject(rogovicaOS));
+
+        gd.rogovicaOD = rogovicaOD;
+        gd.rogovicaOS = rogovicaOS;
     }
 
     // Функция для парсинга блока "Total Kerotemetry"
-    public static void TotalKeratometeryParsing(string[] arr)
+    public static void TotalKeratometeryParsing(string[] arr, GeneralData gd)
     {
         string[] result = DataFormatting(arr, "Total Keratometry", "right");
 
@@ -110,7 +131,6 @@ public class PdfParser
             DTK3 = result[12]
         };
 
-        File.AppendAllText(output_name, "\n" + JsonConvert.SerializeObject(TotalKeratometeryOD));
 
         result = DataFormatting(arr, "Total Keratometry", "left");
 
@@ -131,10 +151,12 @@ public class PdfParser
             DTK3 = result[12]
         };
 
-        File.AppendAllText(output_name, "\n" + JsonConvert.SerializeObject(TotalKeratometeryOS));
+
+        gd.TotalKeratometeryOD = TotalKeratometeryOD;
+        gd.TotalKeratometeryOS = TotalKeratometeryOS;
     }
 
-    public static void CorneaBackSurfaceParsing(string[] arr)
+    public static void CorneaBackSurfaceParsing(string[] arr, GeneralData gd)
     {
         string[] result = DataFormatting(arr, "Значения задней поверхности роговицы", "right");
 
@@ -156,7 +178,6 @@ public class PdfParser
             DPK3 = result[12]
         };
 
-        File.AppendAllText(output_name, "\n" + JsonConvert.SerializeObject(zadRogovicaOD));
 
         result = DataFormatting(arr, "Значения задней поверхности роговицы", "left");
 
@@ -177,10 +198,12 @@ public class PdfParser
             PSE3 = result[11],
             DPK3 = result[12]
         };
-        File.AppendAllText(output_name, "\n" + JsonConvert.SerializeObject(zadRogovicaOS));
+
+        gd.zadRogovicaOD = zadRogovicaOD;
+        gd.zadRogovicaOS = zadRogovicaOS;
     }
 
-    public static void OtherValueParsing(string[] arr)
+    public static void OtherValueParsing(string[] arr, GeneralData gd)
     {
         string[] result = DataFormatting(arr, "Прочие значения", "right");
 
@@ -196,7 +219,6 @@ public class PdfParser
             CWChord = result[6],
         };
 
-        File.AppendAllText(output_name, "\n" + JsonConvert.SerializeObject(otherOD));
 
         result = DataFormatting(arr, "Прочие значения", "left");
 
@@ -211,7 +233,9 @@ public class PdfParser
             CWChord = result[6],
         };
 
-        File.AppendAllText(output_name, "\n" + JsonConvert.SerializeObject(otherOS));
+
+        gd.otherOD = otherOD;
+        gd.otherOS = otherOS;
     }
 
 

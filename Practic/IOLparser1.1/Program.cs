@@ -6,6 +6,7 @@ namespace IOLparser1._1
 {
     public static class Program
     {
+        public static GeneralData? gd = new GeneralData();
         public static void Parsing(string path)
         {
             string[] input = pdfReading(path);
@@ -17,7 +18,7 @@ namespace IOLparser1._1
 
             File.WriteAllText(output_name, JsonConvert.SerializeObject(newPatient));
 
-            PdfParser.FifthPageParser(path, output_name);
+            PdfParser.FifthPageParser(path, output_name, gd);
         }
 
         public static string[] pdfReading(string path)

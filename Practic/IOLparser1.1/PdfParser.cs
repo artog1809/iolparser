@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Reflection;
+using System.Text.Encodings.Web;
+using System.Text.Json;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 using Newtonsoft.Json;
@@ -9,7 +11,7 @@ namespace IOLparser1._1;
 public class PdfParser
 {
     // Функция для парсинга пятой страницы файла
-    public static void FifthPageParser(string path, string output_name)
+    public static void FifthPageParser(string path, string output_name, GeneralData gd)
     {
         // Считывание текста из файла
         PdfReader reader = new PdfReader(path);
@@ -22,112 +24,211 @@ public class PdfParser
         string[] arr = text.Split(new char[] { '\n' });
 
         // Парсинг блока "Значения роговицы"
-        CorneaValuesParsing(arr.Skip(20).ToArray(), output_name);
+        CorneaValuesParsing(arr.Skip(20).ToArray(),output_name, gd);
 
         // Парсинг блока "Total Keratometry"
-        TotalKeratometeryParsing(arr, output_name);
+        TotalKeratometeryParsing(arr,output_name, gd);
 
         arr = text.Split(new char[] { '\n' });
 
         // Парсинг блока "Значения задней поверхности роговицы"
-        CorneaBackSurfaceParsing(arr, output_name);
+        CorneaBackSurfaceParsing(arr,output_name, gd);
 
         arr = text.Split(new char[] { '\n' });
 
         // Парсинг блока "Прочие значения"
 
-        OtherValueParsing(arr, output_name);
+        OtherValueParsing(arr,output_name, gd);
+
+
+        JsonSerializerOptions options = new JsonSerializerOptions
+        {
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+            WriteIndented = true
+        };
+
+        string jsonString = System.Text.Json.JsonSerializer.Serialize(gd, options);
+
+
+        File.WriteAllText(output_name, jsonString);
     }
 
     // Функция для парсинга блока "Значения роговицы"
-    public static void CorneaValuesParsing(string[] arr, string output_name)
+    public static void CorneaValuesParsing(string[] arr, string output_name, GeneralData gd)
     {
         string[] result = DataFormatting(arr, "Значения роговицы", "right");
 
-        Cornea corneaRight = new Cornea(result[0], result[1], result[2], result[3], result[4],
-            result[5], result[6], result[7], result[8],
-            result[9], result[10], result[11], result[12]);
+        Cornea rogovicaOD = new Cornea
+        {
+            SE = result[0],
+            SD1 = result[1],
+            K1 = result[2],
+            SD2 = result[3],
+            K2 = result[4],
+            SD3 = result[5],
+            DK = result[6],
+            SE1 = result[7],
+            DK1 = result[8],
+            SE2 = result[9],
+            DK2 = result[10],
+            SE3 = result[11],
+            DK3 = result[12]
+        };
 
-        File.AppendAllText(output_name, "\n" + "// Значения роговицы для правого глаза");
-        File.AppendAllText(output_name, "\n" + JsonConvert.SerializeObject(corneaRight));
+
 
         result = DataFormatting(arr, "Значения роговицы", "left");
 
-        Cornea corneaLeft = new Cornea(result[0], result[1], result[2], result[3], result[4],
-            result[5], result[6], result[7], result[8],
-            result[9], result[10], result[11], result[12]);
+        Cornea rogovicaOS = new Cornea
+        {
+            SE = result[0],
+            SD1 = result[1],
+            K1 = result[2],
+            SD2 = result[3],
+            K2 = result[4],
+            SD3 = result[5],
+            DK = result[6],
+            SE1 = result[7],
+            DK1 = result[8],
+            SE2 = result[9],
+            DK2 = result[10],
+            SE3 = result[11],
+            DK3 = result[12]
+        };
 
-        File.AppendAllText(output_name, "\n" + "// Значения роговицы для левого глаза");
-        File.AppendAllText(output_name, "\n" + JsonConvert.SerializeObject(corneaLeft));
+
+        gd.rogovicaOD = rogovicaOD;
+        gd.rogovicaOS = rogovicaOS;
     }
 
     // Функция для парсинга блока "Total Kerotemetry"
-    public static void TotalKeratometeryParsing(string[] arr, string output_name)
+    public static void TotalKeratometeryParsing(string[] arr, string output_name, GeneralData gd)
     {
         string[] result = DataFormatting(arr, "Total Keratometry", "right");
 
         // Заполнить JSON файл данными класса TotalKeratometery
-        TotalKeratometery totalKeratometery = new TotalKeratometery(result[0], result[1], result[2], result[3],
-            result[4],
-            result[5], result[6], result[7], result[8],
-            result[9], result[10], result[11], result[12]);
+        TotalKeratometery TotalKeratometeryOD = new TotalKeratometery
+        {
+            TSE = result[0],
+            SD1 = result[1],
+            TK1 = result[2],
+            SD2 = result[3],
+            TK2 = result[4],
+            SD3 = result[5],
+            DTK = result[6],
+            TSE1 = result[7],
+            DTK1 = result[8],
+            TSE2 = result[9],
+            DTK2 = result[10],
+            TSE3 = result[11],
+            DTK3 = result[12]
+        };
 
-        File.AppendAllText(output_name, "\n" + "//TotalKeratometry для правого глаза");
-        File.AppendAllText(output_name, "\n" + JsonConvert.SerializeObject(totalKeratometery));
 
         result = DataFormatting(arr, "Total Keratometry", "left");
 
-        TotalKeratometery totalKeratometeryLeft = new TotalKeratometery(result[0], result[1], result[2], result[3],
-            result[4],
-            result[5], result[6], result[7], result[8],
-            result[9], result[10], result[11], result[12]);
+        TotalKeratometery TotalKeratometeryOS = new TotalKeratometery
+        {
+            TSE = result[0],
+            SD1 = result[1],
+            TK1 = result[2],
+            SD2 = result[3],
+            TK2 = result[4],
+            SD3 = result[5],
+            DTK = result[6],
+            TSE1 = result[7],
+            DTK1 = result[8],
+            TSE2 = result[9],
+            DTK2 = result[10],
+            TSE3 = result[11],
+            DTK3 = result[12]
+        };
 
-        File.AppendAllText(output_name, "\n" + "//TotalKeratometry для левого глаза");
-        File.AppendAllText(output_name, "\n" + JsonConvert.SerializeObject(totalKeratometeryLeft));
+
+        gd.TotalKeratometeryOD = TotalKeratometeryOD;
+        gd.TotalKeratometeryOS = TotalKeratometeryOS;
     }
 
-    public static void CorneaBackSurfaceParsing(string[] arr, string output_name)
+    public static void CorneaBackSurfaceParsing(string[] arr, string output_name, GeneralData gd)
     {
         string[] result = DataFormatting(arr, "Значения задней поверхности роговицы", "right");
 
         // Заполнить JSON файл данными класса TotalKeratometery
-        CorneaBackSurface corneaBackSurface = new CorneaBackSurface(result[0], result[1], result[2], result[3],
-            result[4],
-            result[5], result[6], result[7], result[8],
-            result[9], result[10], result[11], result[12]);
+        CorneaBackSurface zadRogovicaOD = new CorneaBackSurface
+        {
+            PSE = result[0],
+            SD1 = result[1],
+            PK1 = result[2],
+            SD2 = result[3],
+            PK2 = result[4],
+            SD3 = result[5],
+            DPK = result[6],
+            PSE1 = result[7],
+            DPK1 = result[8],
+            PSE2 = result[9],
+            DPK2 = result[10],
+            PSE3 = result[11],
+            DPK3 = result[12]
+        };
 
-        File.AppendAllText(output_name, "\n" + "//Значения задней поверхности роговицы для правого глаза");
-        File.AppendAllText(output_name, "\n" + JsonConvert.SerializeObject(corneaBackSurface));
 
         result = DataFormatting(arr, "Значения задней поверхности роговицы", "left");
 
         // Заполнить JSON файл данными класса TotalKeratometery
-        CorneaBackSurface corneaBackSurfaceLeft = new CorneaBackSurface(result[0], result[1], result[2], result[3],
-            result[4],
-            result[5], result[6], result[7], result[8],
-            result[9], result[10], result[11], result[12]);
+        CorneaBackSurface zadRogovicaOS = new CorneaBackSurface
+        {
+            PSE = result[0],
+            SD1 = result[1],
+            PK1 = result[2],
+            SD2 = result[3],
+            PK2 = result[4],
+            SD3 = result[5],
+            DPK = result[6],
+            PSE1 = result[7],
+            DPK1 = result[8],
+            PSE2 = result[9],
+            DPK2 = result[10],
+            PSE3 = result[11],
+            DPK3 = result[12]
+        };
 
-        File.AppendAllText(output_name, "\n" + "//Значения задней поверхности роговицы для левого глаза");
-        File.AppendAllText(output_name, "\n" + JsonConvert.SerializeObject(corneaBackSurfaceLeft));
+        gd.zadRogovicaOD = zadRogovicaOD;
+        gd.zadRogovicaOS = zadRogovicaOS;
     }
 
-    public static void OtherValueParsing(string[] arr, string output_name)
+    public static void OtherValueParsing(string[] arr, string output_name, GeneralData gd)
     {
         string[] result = DataFormatting(arr, "Прочие значения", "right");
 
-        OtherValues otherValues =
-            new OtherValues(result[0], result[1], result[2], result[3], result[4], result[5], result[6]);
 
-        File.AppendAllText(output_name, "\n" + "//Прочие значения для правого глаза");
-        File.AppendAllText(output_name, "\n" + JsonConvert.SerializeObject(otherValues));
+        OtherValues otherOD = new OtherValues
+        {
+            CCT = result[0],
+            SD = result[1],
+            WTW = result[2],
+            Ix = result[3],
+            Iy = result[4],
+            P = result[5],
+            CWChord = result[6],
+        };
+
 
         result = DataFormatting(arr, "Прочие значения", "left");
 
-        OtherValues otherValuesLeft =
-            new OtherValues(result[0], result[1], result[2], result[3], result[4], result[5], result[6]);
+        OtherValues otherOS = new OtherValues
+        {
+            CCT = result[0],
+            SD = result[1],
+            WTW = result[2],
+            Ix = result[3],
+            Iy = result[4],
+            P = result[5],
+            CWChord = result[6],
+        };
 
-        File.AppendAllText(output_name, "\n" + "//Прочие значения для левого глаза");
-        File.AppendAllText(output_name, "\n" + JsonConvert.SerializeObject(otherValuesLeft));
+
+        gd.otherOD = otherOD;
+        gd.otherOS = otherOS;
     }
 
 

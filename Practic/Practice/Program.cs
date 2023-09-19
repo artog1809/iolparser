@@ -9,6 +9,7 @@ namespace Practice
     public static class Program
     {
         public static string? output_name;
+        public static GeneralData? gd = new GeneralData();
 
         static void Main(string[] args)
         {
@@ -16,6 +17,7 @@ namespace Practice
             string[] input = pdfReading();
 
             string[] word = input[2].Split(new char[] { ' ' });
+
 
             Patient newPatient = new Patient
             {
@@ -25,9 +27,9 @@ namespace Practice
                 PatientId = input[5]
             };
 
-            File.WriteAllText(output_name + ".json", JsonConvert.SerializeObject(newPatient));
-      
-            PdfParser.FifthPageParser();
+            gd.patient = newPatient;
+
+            PdfParser.FifthPageParser(gd);
 
         }
 
