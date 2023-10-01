@@ -12,7 +12,8 @@ namespace Practice
 		public CorneaBackSurface zadRogovicaOS { get; set; }
 		public OtherValues otherOD { get; set; }
 		public OtherValues otherOS { get; set; }
-
-	}
+		public BioIndicators bioIndicatorsOD { get; set; }
+        public BioIndicators bioIndicatorsOS { get; set; }
+    }
 }
 

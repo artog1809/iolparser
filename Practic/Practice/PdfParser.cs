@@ -44,7 +44,14 @@ public class PdfParser
         // Парсинг блока "Прочие значения"
 
         OtherValueParsing(arr, gd);
-        
+
+        text = PdfTextExtractor.GetTextFromPage(reader, 1);
+        // Разбиение на строки
+        string[] arr1 = text.Split(new char[] { '\n' });
+
+        BioIndicatorsParsing(arr1, gd);
+      
+
 
         JsonSerializerOptions options = new JsonSerializerOptions
         {
@@ -59,6 +66,47 @@ public class PdfParser
 
 
     }
+
+    public static void BioIndicatorsParsing(string[] arr, GeneralData gd)
+    {
+        string[] result = DataFormatting(arr, "Биометрические показатели", "right");
+
+        BioIndicators bioIndicatorsOD = new BioIndicators
+        {
+            AL = result[0],
+            ASD = result[1],
+            LT = result[2],
+            IOL_BARETT = result[3],
+            SE_BARETT = result[4],
+            IOL_HOLLADAY2 = result[5],
+            SE_HOLLADAY2 = result[6],
+            IOL_HAIGIS = result[7],
+            SE_HAIGIS = result[8],
+            IOL_HOFFERQ = result[9],
+            SE_HOFFERQ = result[10]
+        };
+
+       result = DataFormatting(arr, "Биометрические показатели", "left");
+
+        BioIndicators bioIndicatorsOS = new BioIndicators
+        {
+            AL = result[0],
+            ASD = result[1],
+            LT = result[2],
+            IOL_BARETT = result[3],
+            SE_BARETT = result[4],
+            IOL_HOLLADAY2 = result[5],
+            SE_HOLLADAY2 = result[6],
+            IOL_HAIGIS = result[7],
+            SE_HAIGIS = result[8],
+            IOL_HOFFERQ = result[9],
+            SE_HOFFERQ = result[10]
+        };
+
+        gd.bioIndicatorsOD = bioIndicatorsOD;
+        gd.bioIndicatorsOS = bioIndicatorsOS;
+    }
+
 
     // Функция для парсинга блока "Значения роговицы"
     public static void CorneaValuesParsing(string[] arr, GeneralData gd)
@@ -263,38 +311,87 @@ public class PdfParser
                 arr_copy[7] = arr_copy[8];
                 
             }
-           
-            int flagOfEnd =  8;
 
-            for (int i = flagOfEnd; i < arr_copy.Length; i++)
+            int flagOfEnd = 8;
+            if (nameOfBlock == "Биометрические показатели")
+                flagOfEnd =  4;
+
+
+            if(flagOfEnd == 8)
             {
-                arr_copy[i] = string.Empty;
-            }
-
-            arr_copy = arr_copy.Where(x => !string.IsNullOrEmpty(x)).ToArray();
-
-            for (int i = 1; i < arr_copy.Length; i++)
-            {
-                if (eye == "right")
+                for (int i = flagOfEnd; i < arr_copy.Length; i++)
                 {
-                    if (nameOfBlock == "Значения роговицы" && i == 1)
+                    arr_copy[i] = string.Empty;
+                }
+
+                arr_copy = arr_copy.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+
+                for (int i = 1; i < arr_copy.Length; i++)
+                {
+                    if (eye == "right")
                     {
-                        arr_copy[i] = arr_copy[i].Substring(0, arr_copy[i].Length / 2 + 1);
+                        if (nameOfBlock == "Значения роговицы" && i == 1)
+                        {
+                            arr_copy[i] = arr_copy[i].Substring(0, arr_copy[i].Length / 2 + 1);
+                        }
+                        else
+                        {
+                            arr_copy[i] = arr_copy[i].Substring(0, arr_copy[i].Length / 2);
+                        }
                     }
                     else
                     {
-                        arr_copy[i] = arr_copy[i].Substring(0, arr_copy[i].Length / 2);
+                        if (nameOfBlock == "Значения роговицы" && i == 1)
+                        {
+                            arr_copy[i] = arr_copy[i].Substring(arr_copy[i].Length / 2 + 1);
+                        }
+                        else
+                        {
+                            arr_copy[i] = arr_copy[i].Substring(arr_copy[i].Length / 2);
+                        }
                     }
                 }
-                else
+            }
+            else
+            {
+                
+
+                for (int i = flagOfEnd; arr_copy[i][0] != '+'; i++)
                 {
-                    if (nameOfBlock == "Значения роговицы" && i == 1)
+                    arr_copy[i] = string.Empty;
+                    flagOfEnd = i;
+                }
+                int tmpflagOfEnd = flagOfEnd + 5;
+                arr_copy[tmpflagOfEnd + 1] = string.Empty;
+                arr_copy[tmpflagOfEnd + 2] = string.Empty;
+                arr_copy = arr_copy.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+
+                flagOfEnd = 9;
+                for (int i = flagOfEnd; arr_copy[i][0] != '+'; i++)
+                {
+                    arr_copy[i] = string.Empty;
+                    flagOfEnd = i;
+                }
+              
+                arr_copy = arr_copy.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+                flagOfEnd = 14;
+                for (int i = flagOfEnd; i < arr_copy.Length; i++)
+                {
+                    arr_copy[i] = string.Empty;
+                }
+                arr_copy = arr_copy.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+                for (int i = 1; i < arr_copy.Length; i++)
+                {
+                    if (eye == "right")
                     {
-                        arr_copy[i] = arr_copy[i].Substring(arr_copy[i].Length / 2 + 1);
+                       
+                            arr_copy[i] = arr_copy[i].Substring(0, arr_copy[i].Length / 2);
+                        
                     }
                     else
-                    {
-                        arr_copy[i] = arr_copy[i].Substring(arr_copy[i].Length / 2);
+                    { 
+                            arr_copy[i] = arr_copy[i].Substring(arr_copy[i].Length / 2);
+                       
                     }
                 }
             }
@@ -303,20 +400,56 @@ public class PdfParser
             int indexOfSpace = 0;
 
             // Выделить в каждую строку подстроки формата "AA: 'значение'"
-            for (int i = 1; i < arr_copy.Length; i++)
+
+            if(nameOfBlock != "Биометрические показатели")
             {
-                index = arr_copy[i].LastIndexOf(':');
-
-                if (arr_copy[i].Length > 25)
+                for (int i = 1; i < arr_copy.Length; i++)
                 {
-                    for (int j = index; arr_copy[i][j] != ' '; j--)
-                    {
-                        indexOfSpace = j;
-                    }
 
-                    arr_copy[i] = arr_copy[i].Remove(indexOfSpace - 1, 1).Insert(indexOfSpace - 1, '.'.ToString());
+                    index = arr_copy[i].LastIndexOf(':');
+
+                    if (arr_copy[i].Length > 25)
+                    {
+                        for (int j = index; arr_copy[i][j] != ' '; j--)
+                        {
+                            indexOfSpace = j;
+                        }
+
+                        arr_copy[i] = arr_copy[i].Remove(indexOfSpace - 1, 1).Insert(indexOfSpace - 1, '.'.ToString());
+                    }
                 }
             }
+            else
+            {
+                for(int i = 1; i < 4; i++)
+                {
+
+                    if (eye == "left")
+                    {
+                        arr_copy[i] = arr_copy[i].Remove(0, 1);
+                        arr_copy[i] = arr_copy[i].Remove(arr_copy[i].Length / 2 + 1);
+
+                    }
+                    else
+                    {
+                        arr_copy[i] = arr_copy[i].Remove(arr_copy[i].Length / 2 + 1);
+
+                    }
+
+                }
+                for (int i = 4; i < arr_copy.Length; i++)
+                {
+                    if (i!=6 && i !=11)
+                        arr_copy[i] = string.Empty;
+                }
+                arr_copy = arr_copy.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+                
+                for(int i = 4; i < arr_copy.Length; i++)
+                {
+                    arr_copy[i] = arr_copy[i].Remove(arr_copy[i].Length/2, 1).Insert(arr_copy[i].Length / 2, '.'.ToString());
+                }
+            }
+            
         }
         else
         {
@@ -378,25 +511,83 @@ public class PdfParser
 
         string[] result = Array.Empty<string>();
         string[] result1 = Array.Empty<string>();
+        string[] result2 = Array.Empty<string>();
 
-
-        // Форматирование данных для корректного отображения в JSON файле
-        for (int i = 1; i < arr_copy.Length; i += 2)
+        if (nameOfBlock != "Биометрические показатели")
         {
-            word = arr_copy[i].Split(new char[] { '.' });
-
-            if (i != arr_copy.Length - 1)
+            for (int i = 1; i < arr_copy.Length; i += 2)
             {
-                secword = arr_copy[i + 1].Split(new char[] { '.' });
-                result1 = word.Concat(secword).ToArray();
-            }
-            else
-            {
-                result1 = word;
-            }
+                word = arr_copy[i].Split(new char[] { '.' });
 
-            result = result.Concat(result1).ToArray();
+                if (i != arr_copy.Length - 1)
+                {
+                    secword = arr_copy[i + 1].Split(new char[] { '.' });
+                    result1 = word.Concat(secword).ToArray();
+                }
+                else
+                {
+                    result1 = word;
+                }
+
+                result = result.Concat(result1).ToArray();
+            }
         }
+        else
+        {
+            result = result.Concat(arr_copy).ToArray();
+
+            result[0] = string.Empty;
+            result[4] = string.Empty;
+            result[5] = string.Empty;
+
+            result = result.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+
+            result2 = result2.Concat(result).ToArray();
+            //for (int i = 0; i < result.Length; i++)
+            //    Console.WriteLine(result[i]);
+
+
+
+            for (int i = 4; i < arr_copy.Length; i += 2)
+            {
+                word = arr_copy[i].Split(new char[] { '.' });
+
+                if (i != arr_copy.Length - 1)
+                {
+                    secword = arr_copy[i + 1].Split(new char[] { '.' });
+                    result1 = word.Concat(secword).ToArray();
+                }
+                else
+                {
+                    result1 = word;
+                }
+
+                result = result.Concat(result1).ToArray();
+            }
+            for (int i = 3; i < result.Length; i++)
+            {
+                result[i] = result[i].Remove(result[i].Length / 2 , 1).Insert(result[i].Length / 2, '.'.ToString());
+            }
+            for (int i = 3; i < result.Length; i+=2)
+            {
+                word = result[i].Split(new char[] { '.' });
+
+                if (i != result.Length - 1)
+                {
+                    secword = result[i + 1].Split(new char[] { '.' });
+                    result1 = word.Concat(secword).ToArray();
+                }
+                else
+                {
+                    result1 = word;
+                }
+
+                result2 = result2.Concat(result1).ToArray();
+            }
+            result = result2;
+        }
+
+ 
 
 
         if (nameOfBlock == "Прочие значения")
@@ -426,16 +617,31 @@ public class PdfParser
             result[6] = result[6].Insert(9, word[1]);
         }
 
-        for (int i = 0; i < result.Length; i++)
+        if(nameOfBlock != "Биометрические показатели")
         {
-            int index = result[i].LastIndexOf(':');
-            result[i] = result[i].Remove(0, index + 1);
-            for (int j = 0; j < result[i].Length; j++)
+            for (int i = 0; i < result.Length; i++)
             {
-                if (result[i][0] == ' ')
+                int index = result[i].LastIndexOf(':');
+                result[i] = result[i].Remove(0, index + 1);
+                for (int j = 0; j < result[i].Length; j++)
                 {
-                    result[i] = result[i].Remove(0, 1);
+                    if (result[i][0] == ' ')
+                    {
+                        result[i] = result[i].Remove(0, 1);
+                    }
                 }
+            }
+        }
+        else
+        {
+            int index = 0;
+            for(int i = 0; i < 3; i++)
+            {
+                for(int j = 0; result[i][j] != ' '; j++)
+                {
+                    index = j;
+                }
+                result[i] = result[i].Remove(0, index + 2);
             }
         }
 

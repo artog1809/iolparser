@@ -1,9 +1,9 @@
 {
   "patient": {
-    "Name": "bugaeva l",
-    "BirthDate": "15.02.1947",
-    "Sex": "Женский",
-    "PatientId": "247928"
+    "Name": "зотов е",
+    "BirthDate": "25.08.1961",
+    "Sex": "Мужской",
+    "PatientId": "296"
   },
   "rogovicaOD": {
     "SE": "44,56 дптр",
@@ -112,5 +112,31 @@
     "Iy": "+0,1 мм",
     "P": "2,8 м",
     "CWChord": "0,3 мм @ 339°"
+  },
+  "bioIndicatorsOD": {
+    "AL": "22,86 мм",
+    "ASD": "2,66 мм",
+    "LT": "5,14 мм ",
+    "SE_BARETT": "+0,14",
+    "SE_HAIGIS": "+0,15",
+    "SE_HOLLADAY2": "-0,02",
+    "SE_HOFFERQ": "-0,07",
+    "IOL_BARETT": "+21,50",
+    "IOL_HAIGIS": "+21,50",
+    "IOL_HOLLADAY2": "+22,00",
+    "IOL_HOFFERQ": "+22,00"
+  },
+  "bioIndicatorsOS": {
+    "AL": "22,96 мм",
+    "ASD": "2,61 мм",
+    "LT": "5,29 мм ",
+    "SE_BARETT": " +0,10",
+    "SE_HAIGIS": " +0,13",
+    "SE_HOLLADAY2": "-0,08",
+    "SE_HOFFERQ": "-0,08",
+    "IOL_BARETT": " +21,5",
+    "IOL_HAIGIS": " +21,5",
+    "IOL_HOLLADAY2": "+22,00",
+    "IOL_HOFFERQ": "+22,00"
   }
 }
