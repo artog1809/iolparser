@@ -19,7 +19,7 @@ public class PdfParser
     public static void FifthPageParser(GeneralData gd)
     {
         // Считывание текста из файла
-        PdfReader reader = new PdfReader("test1.pdf");
+        PdfReader reader = new PdfReader("test3.pdf");
 
         string text = string.Empty;
 
@@ -49,7 +49,9 @@ public class PdfParser
         // Разбиение на строки
         string[] arr1 = text.Split(new char[] { '\n' });
 
-        BioIndicatorsParsing(arr1, gd);
+
+        if(arr1.Length > 60)
+            BioIndicatorsParsing(arr1, gd);
       
 
 

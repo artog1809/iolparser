@@ -1,33 +1,30 @@
 ﻿<Properties StartupConfiguration="{97E7B0D3-B853-45D0-81E8-9EE1AB78E971}|Default">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Practice PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="IOLparser1.1/PdfParser.cs">
     <Files>
-      <File FileName="IOLparser1.1/PdfParser.cs" Line="10" Column="1" />
-      <File FileName="IOLparser1.1/Program.cs" Line="13" Column="54" />
-      <File FileName="IOLparser1.1/TotalKeratometery.cs" Line="1" Column="1" />
-      <File FileName="IOLparser1.1/Patient.cs" Line="1" Column="1" />
-      <File FileName="IOLparser1.1/OtherValues.cs" Line="1" Column="1" />
-      <File FileName="IOLparser1.1/GeneralData.cs" Line="1" Column="1" />
-      <File FileName="IOLparser1.1/CorneaBackSurface.cs" Line="1" Column="1" />
-      <File FileName="IOLparser1.1/Cornea.cs" Line="1" Column="1" />
+      <File FileName="IOLparser1.1/BioIndicators.cs" Line="20" Column="1" />
+      <File FileName="IOLparser1.1/PdfParser.cs" Line="46" Column="1" />
+      <File FileName="Practice/PdfParser.cs" Line="54" Column="44" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Practice" expanded="True">
             <Node name="IOLparser" expanded="True" />
-            <Node name="IOLparser1.1" expanded="True">
-              <Node name="PdfParser.cs" selected="True" />
-            </Node>
+            <Node name="IOLparser1.1" expanded="True" selected="True" />
+            <Node name="Practice" expanded="True" />
           </Node>
         </State>
       </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Practice PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MultiItemStartupConfigurations />
 </Properties>
