@@ -3,7 +3,8 @@
     "Name": "NIDZIEVA V",
     "BirthDate": "22.02.1946",
     "Sex": "Женский",
-    "PatientId": "503141"
+    "PatientId": "503141",
+    "DateOfMeasurement": "03.04.2023"
   },
   "rogovicaOD": {
     "SE": "36,86 дптр(!)",

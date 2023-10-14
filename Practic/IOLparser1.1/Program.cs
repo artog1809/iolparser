@@ -11,6 +11,7 @@ namespace IOLparser1._1
         {
             string[] input = pdfReading(path);
             string[] word = input[2].Split(new char[] { ' ' });
+            string[] word1 = input[12].Split(new char[] { ' ' });
 
             PdfParser.FifthPageParser(path, gd);
 
@@ -19,7 +20,8 @@ namespace IOLparser1._1
                 Name = input[1],
                 BirthDate = word[2],
                 Sex = word[4],
-                PatientId = input[5]
+                PatientId = input[5],
+                DateOfMeasurement = word1[2]
             };
 
             gd.patient = newPatient;

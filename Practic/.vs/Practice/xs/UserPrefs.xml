@@ -1,12 +1,19 @@
 ﻿<Properties StartupConfiguration="{97E7B0D3-B853-45D0-81E8-9EE1AB78E971}|Default">
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Practice PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="IOLparser1.1/PdfParser.cs">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="IOLparser1.1/Program.cs">
     <Files>
-      <File FileName="IOLparser1.1/BioIndicators.cs" Line="20" Column="1" />
+      <File FileName="IOLparser1.1/BioIndicators.cs" />
       <File FileName="IOLparser1.1/PdfParser.cs" Line="46" Column="1" />
-      <File FileName="Practice/PdfParser.cs" Line="54" Column="44" />
+      <File FileName="Practice/PdfParser.cs" />
+      <File FileName="Practice/Patient.cs" Line="11" Column="1" />
+      <File FileName="Practice/Program.cs" Line="31" Column="1" />
+      <File FileName="IOLparser1.1/Program.cs" Line="24" Column="45" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -23,8 +30,4 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.Practice PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>

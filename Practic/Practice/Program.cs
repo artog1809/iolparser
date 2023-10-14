@@ -3,6 +3,7 @@ using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 using iTextSharp.text.pdf.qrcode;
 using Newtonsoft.Json;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Practice
 {
@@ -16,15 +17,17 @@ namespace Practice
             // Выгрузка текста с пдф
             string[] input = pdfReading();
 
-            string[] word = input[2].Split(new char[] { ' ' });
 
+            string[] word = input[2].Split(new char[] { ' ' });
+            string[] word1 = input[12].Split(new char[] { ' ' });
 
             Patient newPatient = new Patient
             {
                 Name = input[1],
                 BirthDate = word[2],
                 Sex = word[4],
-                PatientId = input[5]
+                PatientId = input[5],
+                DateOfMeasurement = word1[2]
             };
 
             gd.patient = newPatient;
