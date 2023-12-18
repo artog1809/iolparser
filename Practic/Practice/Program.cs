@@ -39,7 +39,7 @@ namespace Practice
 
         public static string[] pdfReading()
         {
-            output_name = "test2";
+            output_name = "test1";
             PdfReader reader = new PdfReader(output_name + ".pdf");
             string text = string.Empty;
 
